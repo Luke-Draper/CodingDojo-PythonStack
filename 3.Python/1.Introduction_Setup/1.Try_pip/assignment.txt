@@ -1,0 +1,32 @@
+pip install Django==1.11.9
+This command installs the 1.11.9 release of Django
+
+pip list
+This command lists the currently installed packages and their versions
+
+deactivate
+This command closes the virtual environment
+
+pip3 list
+In my installation this is an aliased command. as such pip list and pip3 list return the same result. This is not always the case, especially in older python installations.
+
+source py3Env/Scripts/activate
+This command starts the virtual environment
+
+pip install Django==1.11.9
+This command installs the 1.11.9 release of Django. Because this is already installed on my system the command does nothing.
+
+pip freeze
+As I understand it this outputs the currently required packages to run the current process. List simply lists installed packages.
+
+cd into your Desktop directory then run pip freeze > requirements.txt
+This outputs a file called requirements.txt with the output from pip freeze inside.
+
+pip uninstall Django
+This command uninstalls Django
+
+pip show Django
+This returns nothing as Django is uninstalled
+
+pip search Flask
+this returns a list of all packages that have Flask or flask in the title.
