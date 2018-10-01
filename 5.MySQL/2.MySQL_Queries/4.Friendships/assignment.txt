@@ -1,0 +1,12 @@
+1.
+SELECT CONCAT(users.first_name, ' ', users.last_name) AS user_1_name, CONCAT(user2.first_name, ' ', user2.last_name) AS user_2_name
+FROM users
+LEFT JOIN friendships ON users.id = friendships.friend_1_id
+LEFT JOIN users as user2 ON user2.id = friendships.friend_2_id
+WHERE users.first_name = 'Kermit' OR user2.first_name = 'Kermit';
+
+2.
+SELECT COUNT(*) FROM friendships;
+
+3.
+
