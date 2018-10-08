@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Playground Assignment</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			body {
+				background-color: LightBlue;
+			}
+			h1 {
+				color: maroon;
+				margin-left: 40px;
+			}
+			.box {
+				display: inline-block;
+				background-color: {{ color }};
+				width: 40px;
+				height: 40px;
+				margin: 5px;
+				border: 1px solid black;
+			}
+			</style>
+	</head>
+	<body>
+		<h1>Welcome!</h1>
+		{% for i in range(0,number): %}
+		<div class="box"></div>
+		{% endfor %}
+	</body>
+</html>
