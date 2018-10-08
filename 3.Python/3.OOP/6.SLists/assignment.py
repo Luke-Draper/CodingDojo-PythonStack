@@ -20,7 +20,9 @@ class SList:
 		return self
 	
 	def removeNode(self, value):
-		if self.head.value == value:
+		if self.head == None:
+			return self
+		elif self.head.value == value:
 			self.head = self.head.next
 		else:
 			current_node = self.head
@@ -40,6 +42,24 @@ class SList:
 		output += str(current_node.value)
 		print(output)
 		return self
+	
+	def insertNode(self, value, index):
+		new_node = Node(value)
+		if index == 0:
+			new_node.next = self.head
+			self.head = new_node
+		else:
+			current_node_index = 0
+			current_node = self.head
+			while (current_node.next != None):
+				if current_node_index+1 == index:
+					break
+				current_node_index += 1
+				current_node = current_node.next
+			new_node.next = current_node.next
+			current_node.next = new_node
+		return self
+
 
 list1 = SList(5)
 list1.addNode(7)
@@ -52,7 +72,17 @@ list2 = SList(5)
 list2.addNode(7)
 list2.addNode(9)
 list2.addNode(1)
-list2.removeNode(9) # removes 9, which is one of the middle nodes in the list
-list2.removeNode(5) # removes 5, which is the first value in the list
-list2.removeNode(1) # removes 1, which is the last node in the list
+list2.removeNode(9)
+list2.removeNode(5)
+list2.removeNode(1)
 list2.printAllValues()
+
+list3 = SList(5)
+list3.addNode(7)
+list3.addNode(9)
+list3.addNode(1)
+list3.insertNode(2, 0)
+list3.insertNode(4, 2)
+list3.insertNode(6, 6)
+list3.insertNode(8, 24)
+list3.printAllValues()
