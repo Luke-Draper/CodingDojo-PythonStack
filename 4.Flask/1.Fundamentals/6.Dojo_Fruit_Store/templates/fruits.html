@@ -1,0 +1,56 @@
+<html>
+	<head>
+	<title>Dojo Fruit Store Assignment</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</head>
+	<body>
+
+		<header>
+			<div class="navbar navbar-dark bg-dark box-shadow">
+				<div class="container d-flex justify-content-between">
+				<a href="#" class="navbar-brand d-flex align-items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+					<strong>Dojo Fruit Store</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				</div>
+			</div>
+		</header>
+		<main role="main">
+			<section class="jumbotron text-center">
+				<div class="container">
+					<h1 class="jumbotron-heading">Dojo Fruits</h1>
+					<div class="card-group justify-content-center">
+							<div class="col-3 m-2 card">
+								<img class="card-img-top mt-3" src="{{ url_for('static', filename='img/strawberry.png') }}" alt="A large juicy strawberry">
+								<div class="card-body">
+									<h2 class="card-title">Strawberry</h2>
+									<p class="card-text">A large juicy strawberry</p>
+								</div>
+							</div>
+							<div class="col-3 m-2 card">
+								<img class="card-img-top mt-2" src="{{ url_for('static', filename='img/raspberry.png') }}" alt="A succulent raspberry">
+								<div class="card-body">
+									<h2 class="card-title">Raspberry</h2>
+									<p class="card-text">A succulent raspberry</p>
+								</div>
+							</div>
+							<div class="col-3 m-2 card">
+								<img class="card-img-top mt-1" src="{{ url_for('static', filename='img/apple.png') }}" alt="A healthy apple">
+								<div class="card-body">
+									<h2 class="card-title">Apple</h2>
+									<p class="card-text">A healthy apple</p>
+								</div>
+							</div>
+					</div>
+					<p>
+						<a href="/" class="btn btn-primary my-2">Go back</a>
+					</p>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
