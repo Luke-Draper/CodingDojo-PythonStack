@@ -5,32 +5,34 @@ app.secret_key = 'JimmyKnows'
 
 @app.route('/')
 def default():
+	if 'current_gold' not in session:
+		session['current_gold'] = 0
+	if 'history' not in session:
+		session['history'] = []
 	return render_template("index.html")
 
-@app.route('/result', methods=['POST'])
+@app.route('/find_gold', methods=['POST'])
 def result():
-	name = request.form['name']
-	location = request.form['location']
-	favorite_language = request.form['favorite_language']
-	comment = request.form['comment']
-	result_data = {'name':name, 'location':location, 'favorite_language':favorite_language, 'comment':comment, }
-	return render_template("result.html", results=result_data)
-
-@app.route('/danger')
-def danger():
-	print("a user tried to visit /danger. we have redirected the user to /")
+	update_session_gold(request.form['location'])
 	return redirect('/')
+
+def update_session_gold(location):
+	gold_earned = 0
+	if location == "farm":
+		gold_earned = random.randrange(10,21)
+	if location == "cave":
+		gold_earned = random.randrange(5,11)
+	if location == "house":
+		gold_earned = random.randrange(2,6)
+	if location == "casino":
+		gold_earned = random.randrange(-50,51)
+	session['current_gold'] += gold_earned
+	session['history'].append({"location":location, "gold_earned":gold_earned})
 
 @app.route('/reset_session')
 def reset():
 	session.clear()
 	return redirect('/')
-
-@app.route('/guess', methods=['POST'])
-def guess():
-	session['guess'] = int(request.form['guess'])
-	return redirect('/')
-
 
 if __name__=="__main__":
 	app.run(debug=True)
