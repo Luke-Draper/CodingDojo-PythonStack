@@ -21,7 +21,7 @@
 			<div class="row justify-content-center">
 				<form class="col-4 bg-success p-2 rounded">
 					<div class="form-row my-2 justify-content-center">
-						<h1 class="text-center">You Guessed Right!</h1>
+						<h1 class="text-center">{{ session['number'] }} was the number!</h1>
 						<a class="col-4 ml-2 btn btn-primary" href="/reset_session">Play Again?</a>
 					</div>
 				</form>
