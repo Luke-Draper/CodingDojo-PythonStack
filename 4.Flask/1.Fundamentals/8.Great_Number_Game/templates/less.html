@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Number Game Assignment</title>
+		<meta name="description" content="Number Game Assignment">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</head>
+	<body class="bg-dark text-light">
+		<div class="container justify-content-center">
+			<div class="row justify-content-center">
+				<div class="col-6 p-3 mt-3 bg-secondary rounded text-white">
+					<h1 class="text-center">Welcome to the Great Number Game!</h1>
+					<p class="h4 text-center">I am thinking of a number between 1 and 100...</p>
+					<p class="h4 text-center">Take a guess!</p>
+				</div>
+			</div>
+			<hr class="col-5 bg-primary">
+			<div class="row justify-content-center">
+				<form class="col-4 bg-secondary p-2 rounded" action="/guess" method="post">
+					<div class="form-row my-2 justify-content-center">
+						<label class="col-auto mr-2 col-form-label" for="guess">Guess a Number:</label>
+						<input class="col-4 form-control" type="text" name="guess" id="guess">
+						<input class="col-2 ml-2 btn btn-primary" type="submit" value="Guess">
+					</div>
+				</form>
+			</div>
+			<div class="row mt-4 justify-content-center">
+				<div class="col-4 bg-danger p-2 rounded">
+					<p class="h4 text-center">Too Low!</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
