@@ -1,0 +1,7 @@
+#scroll-bottom {
+	overflow-y: scroll;
+	height: 300px;
+}
+.ml-none {
+	margin-left: 0 !important;
+}
