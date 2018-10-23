@@ -1,0 +1,20 @@
+pymysql.err.InternalError: (1049, "Unknown database 'my'")
+Mispelled Database Name
+
+Something went wrong (1146, "Table 'mydb.users' doesn't exist")
+Uninitialized or misspelled Database Table in Query
+
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'host1' ([Errno 11001] getaddrinfo failed)")
+Misspelled Host
+
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([WinError 10061] No connection could be made because the target machine actively refused it)")
+Misstyped Port Number
+
+pymysql.err.OperationalError: (1045, "Access denied for user 'roo'@'localhost' (using password: YES)")
+Misspelled Username
+
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: NO)")
+No Password
+
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+Misspelled Password
