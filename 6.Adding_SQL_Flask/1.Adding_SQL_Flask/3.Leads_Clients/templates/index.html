@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>C+R Friends Assignment</title>
+		<meta name="description" content="C+R Friends Assignment">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+		
+			function drawChart() {
+		
+				var data = google.visualization.arrayToDataTable([
+					['Customer', 'Number of Leads'],
+					{% if customers|length < 1 %}
+						["No Customers",1]
+					{% else %}
+						{% for customer in customers %}
+						['{{customer["name"]}}',parseInt('{{customer["lead"]}}')],
+						{% endfor %}
+					{% endif %}
+				]);
+		
+				var options = {
+					title: 'List of all customers and number of leads',
+					pieSliceText: 'label',
+					backgroundColor: "transparent",
+					vAxis: {textStyle: {color:"#dddddd"}},
+					titleTextStyle: {color:"#dddddd"},
+					legend: {textStyle: {color:"#dddddd"}},
+					hAxis: {textStyle: {color:"#dddddd"}}
+				};
+		
+				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+		
+				chart.draw(data, options);
+			}
+		}</script>
+	</head>
+	<body class="bg-dark text-light">
+		<div class="container">
+			<div class="mt-4 row justify-content-center">
+				<h2>List of all customers and number of leads</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Customer Name</th>
+							<th scope="col">Number of Leads</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if customers|length < 1 %}
+							<tr><td>No Customers Found.</td></tr>
+						{% else %}
+							{% for customer in customers %}
+							<tr>
+								<td>{{customer["name"]}}</td>
+								<td>{{customer["lead"]}}</td>
+							</tr>
+							{% endfor %}
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+			<div id="piechart" style="width: 900px; height: 500px;"></div>
+		</div>
+	</body>
+</html>
