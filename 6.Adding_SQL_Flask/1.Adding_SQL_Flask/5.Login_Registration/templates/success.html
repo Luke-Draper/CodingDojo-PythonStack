@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Registration Form</title>
+		<meta name="description" content="Registration Form">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</head>
+	<body class="bg-dark">
+		<div class="container text-light">
+			<div class="row p-4 justify-content-center">
+				<h1>Logged In</h1>
+			</div>
+			<div class="row justify-content-center">
+				<p class="ml-2 px-2 py-1 rounded bg-success border border-light">Hello {{user["first_name"]}} {{user["last_name"]}}!</p>
+			</div>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+					<div class="container">
+					{% for category, message in messages %}
+						<div class="row justify-content-center">
+							<p class="ml-2 px-2 py-1 rounded bg-{{category}} border border-light">{{message}}</p>
+						</div>
+					{% endfor %}
+					</div>
+				{% endif %}
+			{% endwith %}
+			<div class="row justify-content-center">
+				<form class="col-10 bg-secondary p-4 rounded" action="/logout" method="post">
+					<div class="form-row justify-content-end">
+						<input class="col-auto p-2 mr-3 btn btn-dark" type="submit" value="Log Out">
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
