@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Email Validation Assignment</title>
+		<meta name="description" content="Email Validation Assignment">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</head>
+	<body class="bg-dark text-light">
+		<div class="container">
+			<div class="row justify-content-center">
+				<form class="col px-4 py-3 mr-3 bg-secondary rounded" action="/submit" method="post">
+					<h2>Add your Email</h2>
+					{% with messages = get_flashed_messages(with_categories=true) %}
+						{% if messages %}
+							<div class="container m-4">
+							{% for category, message in messages %}
+								<div class="row justify-content-center">
+									<p class="ml-2 px-2 py-1 rounded bg-{{category}} border border-light">{{message}}</p>
+								</div>
+							{% endfor %}
+							</div>
+						{% endif %}
+					{% endwith %}
+					<div class="form-row p-2 justify-content-center">
+						<label class="col-sm-4 col-form-label" for="email">Email:</label>
+						<input class="col-sm-8 form-control" type="email" name="email" id="email">
+					</div>
+					<div class="ml-2 form-row">
+						<input class="col-auto p-2 mr-3 btn btn-dark" type="submit" value="Submit">
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
