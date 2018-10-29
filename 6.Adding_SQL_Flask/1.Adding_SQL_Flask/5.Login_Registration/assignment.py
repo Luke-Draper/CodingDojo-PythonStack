@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, flash
 import re
+from flask_bcrypt import Bcrypt
 from mysqlconnection import connectToMySQL
 app = Flask(__name__)
 app.secret_key = 'JimmyKnows'
+bcrypt = Bcrypt(app)
 
 # email
 # first_name
@@ -66,7 +68,6 @@ def validation_name_no_digits(form):
 	if not any(char.isdigit() for char in form['last_name']) < 1:
 		valid = False
 		flash("Last name cannot contain numbers", "danger")
-	print(valid)
 	return valid
 
 # Password should be more than 8 characters
@@ -94,26 +95,17 @@ def validation_password(form):
 def validation_login_password(form):
 	valid = False
 	user = get_user_by_email(form['email'])
-	print("user")
-	print(user)
-	print("form")
-	print(form)
-	if form['password'] == user['password']:
+	if bcrypt.check_password_hash(user['password'], form['password']):
 		valid = True
 	return valid
 
 @app.route('/')
 def default():
-	print(1)
 	if 'user_id' not in session:
-		print(2)
 		session['user_id'] = None
 	if session['user_id'] != None:
-		print(3)
 		if len(get_user_by_id(session['user_id']))>0:
-			print(4)
 			return redirect("/success")
-	print(5)
 	return render_template("index.html")
 
 @app.route('/success')
@@ -151,8 +143,9 @@ def get_user_by_email(email):
 	return mysql.query_db("SELECT users.user_id, users.first_name, users.last_name, users.email, users.password FROM users WHERE email = '"+email+"';")[0]
 
 def insert_user(user):
+	password_hash = bcrypt.generate_password_hash(user['password'])
 	mysql = connectToMySQL('login_registration')
-	return mysql.query_db("INSERT INTO users (first_name, last_name, email, password) VALUES ('"+user['first_name']+"','"+user['last_name']+"','"+user['email']+"','"+user['password']+"');")
+	return mysql.query_db("INSERT INTO users (first_name, last_name, email, password) VALUES ('"+user['first_name']+"','"+user['last_name']+"','"+user['email']+"','"+password_hash+"');")
 
 if __name__=="__main__":
 	app.run(debug=True)
