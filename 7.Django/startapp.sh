@@ -1,8 +1,10 @@
 #!/bin/bash
+echo ""
+echo "running: source $HOME/Documents/Projects/Coding_Dojo/Python_Stack/0.Virtual_Environments/djangoPy3Env/bin/activate"
 source "$HOME/Documents/Projects/Coding_Dojo/Python_Stack/0.Virtual_Environments/djangoPy3Env/bin/activate"
 
 echo ""
-
+echo "running: django-admin startproject main"
 django-admin startproject main
 
 cd main
@@ -13,6 +15,8 @@ cd apps
 
 touch __init__.py
 
+echo ""
+echo "running: python ../manage.py startapp $1"
 python ../manage.py startapp "$1"
 
 cd ../
@@ -27,6 +31,8 @@ mkdir "./apps/$1/templates/$1"
 touch "./apps/$1/templates/$1/index.html"
 touch "./apps/$1/urls.py"
 
+echo ""
+echo "Implementing starter app"
 echo '<!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -127,7 +133,6 @@ echo '<!DOCTYPE html>
 </html>' > "./apps/$1/templates/$1/index.html"
 
 echo 'from django.conf.urls import url,include
-
 urlpatterns = [
 	url(r'"'"'^'"'"', include('"'"'apps.'"$1"'.urls'"'"'))
 ]
@@ -136,7 +141,6 @@ urlpatterns = [
 
 echo 'from django.conf.urls import url
 from . import views
-
 urlpatterns = [
 	url(r'"'"'^$'"'"',views.index),
 	url(r'"'"'^redirect$'"'"',views.redirect),
@@ -146,18 +150,15 @@ urlpatterns = [
 
 
 echo 'from django.shortcuts import render, HttpResponse, redirect
-
 def index(request):
 	context = {
 		"dummy": "dummy"
 	}
 	request.session["dummy"] = "dummy"
 	return render(request,"'"$1"'/index.html",context)
-
 def redirect(request):
 	del request.session["dummy"]
 	return redirect("/")
-
 def post(request):
 	if request.method == "POST":
 		request.session["name"] = request.POST["name"]
@@ -169,11 +170,10 @@ def post(request):
 		return redirect("/")
 	else:
 		return redirect("/")
-
 ' > "./apps/$1/views.py"
 
 echo ""
-echo 'check that => add the line : "apps.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
-echo ""
-echo 'cd into main and run : python manage.py runserver : to start '
+echo 'To start django run:'
+echo 'cd main'
+echo 'python manage.py runserver'
 echo ""
