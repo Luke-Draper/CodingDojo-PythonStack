@@ -15,11 +15,9 @@ touch __init__.py
 
 python ../manage.py startapp "$1"
 
-# echo 'add the line : "app.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
-# echo ""
-# sed '/INSTALLED_APPS = [/a "app.'"$1"'",'
-
 cd ../
+
+sed '/INSTALLED_APPS = \[/a     "apps.'"$1"'",' './main/settings.py'
 
 python manage.py makemigrations
 python manage.py migrate
@@ -58,17 +56,72 @@ echo '<!DOCTYPE html>
 			crossorigin="anonymous"
 		></script>
 	</head>
-	<body>
+	<body class="bg-dark text-light">
 		<div class="container">
-			<h1>Example Page</h1>
-			<form action="/post" method="post">
-				{% csrf_token %}
-				<label for="name">Name:</label>
-				<input type="text" id="name" name="name" placeholder="Name">
-				<label for="desc">Description:</label>
-				<textarea id="desc" name="desc" placeholder="description"></textarea>
-				<button type="submit">Submit</button>
-			</form>
+			<div class="row p-4 justify-content-center"><h1>Survey Form</h1></div>
+			<div class="row justify-content-center">
+				<form
+					class="col-sm-6 bg-secondary p-4 rounded"
+					action="/post"
+					method="post"
+				>
+					{% csrf_token %}
+					<div class="form-row p-2 justify-content-center">
+						<label class="col-sm-4 col-form-label" for="name">Your Name:</label>
+						<input
+							class="col-sm-8 form-control"
+							type="text"
+							name="name"
+							id="name"
+						/>
+					</div>
+					<div class="form-row p-2 justify-content-center">
+						<label class="col-sm-4 col-form-label" for="location"
+							>Dojo Location:</label
+						>
+						<select class="col-sm-8 form-control" name="location" id="location">
+							<option selected disabled value="not_chosen">Choose...</option>
+							<option value="chicago">Chicago</option>
+							<option value="san_jose">San Jose</option>
+							<option value="los_angeles">Los Angeles</option>
+							<option value="new_york">New York</option>
+						</select>
+					</div>
+					<div class="form-row p-2 justify-content-center">
+						<label class="col-sm-4 col-form-label" for="favorite_language"
+							>Favorite Language:</label
+						>
+						<select
+							class="col-sm-8 form-control"
+							name="favorite_language"
+							id="favorite_language"
+						>
+							<option selected disabled value="not_chosen">Choose...</option>
+							<option value="java">Java</option>
+							<option value="python">Python</option>
+							<option value="javascript">JavaScript</option>
+							<option value="c_sharp">C#</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+					<div class="form-group p-2 justify-content-center">
+						<label class="form-label" for="comment">Comment (Optional):</label>
+						<textarea
+							class="form-control"
+							name="comment"
+							id="comment"
+							rows="4"
+						></textarea>
+					</div>
+					<div class="form-row justify-content-end">
+						<input
+							class="col-auto p-2 mr-3 btn btn-dark"
+							type="submit"
+							value="Submit"
+						/>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>' > "./apps/$1/templates/$1/index.html"
@@ -85,8 +138,8 @@ echo 'from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	url(r'"'"'^$'"'"',views.index)
-	url(r'"'"'^redirect$'"'"',views.redirect)
+	url(r'"'"'^$'"'"',views.index),
+	url(r'"'"'^redirect$'"'"',views.redirect),
 	url(r'"'"'^post$'"'"',views.post)
 ]
 ' > "./apps/$1/urls.py"
@@ -107,19 +160,20 @@ def redirect(request):
 
 def post(request):
 	if request.method == "POST":
-			print("")
-			print(request.POST)
-			print(request.POST["name"])
-			print(request.POST["desc"])
-			print("")
-			return redirect("/")
+		request.session["name"] = request.POST["name"]
+		print("")
+		print(request.POST)
+		print(request.POST["name"])
+		print(request.POST["desc"])
+		print("")
+		return redirect("/")
 	else:
-			return redirect("/")
+		return redirect("/")
 
 ' > "./apps/$1/views.py"
 
 echo ""
-echo 'add the line : "app.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
+echo 'check that => add the line : "apps.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
 echo ""
 echo 'cd into main and run : python manage.py runserver : to start '
 echo ""
