@@ -1,3 +1,4 @@
 0.Virtual_Environments/
 **/mysqlconnection*
 startapp.sh
+!7.Django/startapp.sh
