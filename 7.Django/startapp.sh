@@ -21,7 +21,9 @@ python ../manage.py startapp "$1"
 
 cd ../
 
-sed '/INSTALLED_APPS = \[/a     "apps.'"$1"'",' './main/settings.py'
+echo ""
+echo "adding $1 to installed apps"
+sed -i.bkp '/INSTALLED_APPS = \[/a     "apps.'"$1"'",' './main/settings.py'
 
 python manage.py makemigrations
 python manage.py migrate
@@ -81,35 +83,6 @@ echo '<!DOCTYPE html>
 							id="name"
 						/>
 					</div>
-					<div class="form-row p-2 justify-content-center">
-						<label class="col-sm-4 col-form-label" for="location"
-							>Dojo Location:</label
-						>
-						<select class="col-sm-8 form-control" name="location" id="location">
-							<option selected disabled value="not_chosen">Choose...</option>
-							<option value="chicago">Chicago</option>
-							<option value="san_jose">San Jose</option>
-							<option value="los_angeles">Los Angeles</option>
-							<option value="new_york">New York</option>
-						</select>
-					</div>
-					<div class="form-row p-2 justify-content-center">
-						<label class="col-sm-4 col-form-label" for="favorite_language"
-							>Favorite Language:</label
-						>
-						<select
-							class="col-sm-8 form-control"
-							name="favorite_language"
-							id="favorite_language"
-						>
-							<option selected disabled value="not_chosen">Choose...</option>
-							<option value="java">Java</option>
-							<option value="python">Python</option>
-							<option value="javascript">JavaScript</option>
-							<option value="c_sharp">C#</option>
-							<option value="other">Other</option>
-						</select>
-					</div>
 					<div class="form-group p-2 justify-content-center">
 						<label class="form-label" for="comment">Comment (Optional):</label>
 						<textarea
@@ -156,9 +129,11 @@ def index(request):
 	}
 	request.session["dummy"] = "dummy"
 	return render(request,"'"$1"'/index.html",context)
+
 def redirect(request):
 	del request.session["dummy"]
 	return redirect("/")
+
 def post(request):
 	if request.method == "POST":
 		request.session["name"] = request.POST["name"]
@@ -170,6 +145,7 @@ def post(request):
 		return redirect("/")
 	else:
 		return redirect("/")
+
 ' > "./apps/$1/views.py"
 
 echo ""
