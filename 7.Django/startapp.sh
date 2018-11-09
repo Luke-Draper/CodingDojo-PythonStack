@@ -1,6 +1,8 @@
 #!/bin/bash
 source "$HOME/Documents/Projects/Coding_Dojo/Python_Stack/0.Virtual_Environments/djangoPy3Env/bin/activate"
 
+echo ""
+
 django-admin startproject main
 
 cd main
@@ -13,7 +15,8 @@ touch __init__.py
 
 python ../manage.py startapp "$1"
 
-echo 'add the line : "app.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
+# echo 'add the line : "app.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
+# echo ""
 # sed '/INSTALLED_APPS = [/a "app.'"$1"'",'
 
 cd ../
@@ -57,6 +60,15 @@ echo '<!DOCTYPE html>
 	</head>
 	<body>
 		<div class="container">
+			<h1>Example Page</h1>
+			<form action="/post" method="post">
+				{% csrf_token %}
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" placeholder="Name">
+				<label for="desc">Description:</label>
+				<textarea id="desc" name="desc" placeholder="description"></textarea>
+				<button type="submit">Submit</button>
+			</form>
 		</div>
 	</body>
 </html>' > "./apps/$1/templates/$1/index.html"
@@ -74,6 +86,8 @@ from . import views
 
 urlpatterns = [
 	url(r'"'"'^$'"'"',views.index)
+	url(r'"'"'^redirect$'"'"',views.redirect)
+	url(r'"'"'^post$'"'"',views.post)
 ]
 ' > "./apps/$1/urls.py"
 
@@ -85,6 +99,27 @@ def index(request):
 		"dummy": "dummy"
 	}
 	request.session["dummy"] = "dummy"
-	del request.session["dummy"]
 	return render(request,"'"$1"'/index.html",context)
+
+def redirect(request):
+	del request.session["dummy"]
+	return redirect("/")
+
+def post(request):
+	if request.method == "POST":
+			print("")
+			print(request.POST)
+			print(request.POST["name"])
+			print(request.POST["desc"])
+			print("")
+			return redirect("/")
+	else:
+			return redirect("/")
+
 ' > "./apps/$1/views.py"
+
+echo ""
+echo 'add the line : "app.'"$1"'", : after the line : INSTALLED_APPS = [ : in main/main/settings.py before running the server'
+echo ""
+echo 'cd into main and run : python manage.py runserver : to start '
+echo ""
