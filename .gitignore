@@ -2,3 +2,4 @@
 **/mysqlconnection*
 startapp.sh
 !7.Django/startapp.sh
+.vscode/settings.json

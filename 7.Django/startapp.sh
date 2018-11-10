@@ -30,7 +30,13 @@ python manage.py migrate
 
 mkdir "./apps/$1/templates"
 mkdir "./apps/$1/templates/$1"
+mkdir "./apps/$1/static"
+mkdir "./apps/$1/static/$1"
+mkdir "./apps/$1/static/$1/css"
+mkdir "./apps/$1/static/$1/js"
 touch "./apps/$1/templates/$1/index.html"
+touch "./apps/$1/static/$1/css/style.css"
+touch "./apps/$1/static/$1/js/script.js"
 touch "./apps/$1/urls.py"
 
 echo ""
@@ -63,6 +69,9 @@ echo '<!DOCTYPE html>
 			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 			crossorigin="anonymous"
 		></script>
+		{% load static %}
+		<link rel="stylesheet" href="{% static '"'"''"$1"'/css/style.css'"'"' %}">
+		<script src="{% static '"'"''"$1"'/js/script.css'"'"' %}"></script>
 	</head>
 	<body class="bg-dark text-light">
 		<div class="container">
