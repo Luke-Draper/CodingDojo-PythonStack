@@ -1,0 +1,64 @@
+{% extends "semi_restful_users/index_base.html" %}
+
+{% block meta %}
+<title>Edit User {{user.id}}: {{user.first_name}} {{user.last_name}}</title>
+<meta name="description" content="Edit User {{user.id}}: {{user.first_name}} {{user.last_name}}" />
+{% endblock %}
+
+{% block body %}
+<div class="row p-4 justify-content-center"><h1>Edit User {{user.id}}: {{user.first_name}} {{user.last_name}}</h1></div>
+{% include "semi_restful_users/flash_msg.html" %}
+<div class="row justify-content-center">
+	<form
+		class="col-6 bg-secondary p-4 rounded"
+		action="/users/update"
+		method="post"
+	>
+		{% csrf_token %}
+		<div class="form-row p-2 justify-content-center">
+			<label class="col-4 col-form-label" for="first_name">First Name:</label>
+			<input
+				class="col-8 form-control"
+				type="text"
+				name="first_name"
+				id="first_name"
+				value="{{user.first_name}}"
+			/>
+		</div>
+		<div class="form-row p-2 justify-content-center">
+			<label class="col-4 col-form-label" for="last_name">Last Name:</label>
+			<input
+				class="col-8 form-control"
+				type="text"
+				name="last_name"
+				id="last_name"
+				value="{{user.last_name}}"
+			/>
+		</div>
+		<div class="form-row p-2 justify-content-center">
+			<label class="col-4 col-form-label" for="email">Email:</label>
+			<input
+				class="col-8 form-control"
+				type="text"
+				name="email"
+				id="email"
+				value="{{user.email}}"
+			/>
+		</div>
+		<input type="hidden" id="id" name="id" value="{{user.id}}">
+		<div class="form-row justify-content-end">
+			<input
+				class="col-auto p-2 mr-3 btn btn-dark"
+				type="submit"
+				value="Update"
+			/>
+		</div>
+	</form>
+</div>
+<div class="row py-4 justify-content-center">
+	<div class="col-6 row justify-content-end">
+		<a class="col-auto p-2 mr-3 btn btn-secondary" href="/users/{{user.id}}">Show User</a>
+		<a class="col-auto p-2 mr-3 btn btn-secondary" href="/users">Go Back</a>
+	</div>
+</div>
+{% endblock %}

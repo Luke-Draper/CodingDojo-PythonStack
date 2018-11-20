@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% block meta %}
+		<title>Title</title>
+		<meta name="description" content="Description" />
+		{% endblock %}
+		{% include "semi_restful_users/head.html" %}
+	</head>
+	<body class="bg-dark text-light">
+		<div class="container">
+		{% block body %}
+		{% endblock %}
+		</div>
+	</body>
+</html>

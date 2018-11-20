@@ -1,0 +1,50 @@
+{% extends "semi_restful_users/index_base.html" %}
+
+{% block meta %}
+<title>Users</title>
+<meta name="description" content="A list of all users." />
+{% endblock %}
+
+{% block body %}
+<div class="row p-4 justify-content-center"><h1>Users</h1></div>
+{% include "semi_restful_users/flash_msg.html" %}
+<div class="row justify-content-center">
+	<div class="col-10 bg-secondary p-4 rounded">
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<th>Full Name</th> 
+				<th>Email</th>
+				<th>Created At</th>
+				<th>Actions</th>
+			</tr>
+			{% if users|length > 0 %}
+			{% for user in users %}
+			<tr>
+				<td>{{user.id}}</td>
+				<td><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td> 
+				<td>{{user.email}}</td>
+				<td>{{user.created_at}}</td>
+				<td class="d-flex justify-content-end">
+					<div class="btn-group btn-group-sm">
+						<a class="btn btn-dark" href="/users/{{user.id}}">Show</a>
+						<a class="btn btn-dark" href="/users/{{user.id}}/edit">Edit</a>
+						<a class="btn btn-dark" href="/users/{{user.id}}/destroy">Delete</a>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+		</table>
+		<hr class="bg-light"/>
+		<p class="pl-4">No Users Found</p>
+		{% endif %}
+	</div>
+</div>
+<div class="row py-4 justify-content-center">
+	<div class="col-10 row justify-content-end">
+		<a class="col-auto p-2 mr-3 btn btn-secondary" href="/users/new">Add a User</a>
+	</div>
+</div>
+{% endblock %}
